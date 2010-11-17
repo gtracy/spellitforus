@@ -1,0 +1,29 @@
+application: spellitforus
+version: 2
+runtime: python
+api_version: 1
+
+derived_file_type:
+- python_precompiled
+
+handlers:
+- url: /css
+  static_dir: css
+  
+- url: /img
+  static_dir: img
+
+- url: /js
+  static_dir: js
+
+- url: /user.*
+  script: userhandlers.py
+
+- url: /test.*
+  script: testing.py
+  
+- url: /record.*
+  script: recording.py
+  
+- url: .*
+  script: main.py

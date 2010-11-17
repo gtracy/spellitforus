@@ -1,0 +1,28 @@
+
+spellitforus is a app built originally for a Twilio dev contest. You can find a 
+production release at http://spellitfor.us
+
+The point of the app is to let kids practice their spelling in a new way and 
+without any assistance from another person. When a test is taken, you are called
+and prompted for each word. You answer by "typing" characters using the phone's 
+keypad.
+
+The goal of sharing this application is simply to make the code available for 
+others to learn from. Not necessarily as a model for building a robust service.
+After all, this was built in an afternoon. But there are some useful design
+patterns specific to Twilio and managing call flow.
+
+The app was originally deployed on App Engine and those support files are shared 
+here. If you wish to run your own instance on App Engine, keep in the mind the 
+following customizations you'll need to make...
+
+1. app.yaml - Configure your own application id
+
+2. testing.py - Configure your own Twilio credentials and Caller ID
+
+3. main.py - Configure your own Google Analytics ID
+
+4. index.html, profile.html - Configure the footer details to link to your contact information.
+
+I hope you find it useful, and if you can contribute improvements back, I will
+be happy to deploy them!

@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+<head>
+ <title>spellitfor.us</title>
+ <link rel="stylesheet" type="text/css" href="css/style.css">
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script> 
+ <script type="text/javascript" src="js/controls.js?v0.1"></script>
+ <script type="text/javascript" src="/js/jquery.form.js?v2.43"></script>
+ 
+</head>
+ <body>
+
+ <div id="header">
+  <span class="title"><a href="/">spellitfor.us</a></span>
+  <span class="user-login">{{greeting}}</span>
+ </div>
+ 
+ <div id="content">
+  <div id="inventory">
+   {{ addButton }}
+   <h2>Take a Test!</h2>
+   <span class="category-desc">List of available tests</span>
+   {{ specialNote }}
+   {{ random }}
+    <div id="addtest-container">
+      <fieldset>
+      <legend>Share a new test!</legend>
+      <form class="addtest-form" onsubmit="return false">
+       <input type="hidden" name="code" value="{{randomString}}"></input>
+       <table>
+        <tr><td style="padding-left:50px;">
+         Name your test<br/>
+         <input id="name" type=text size=20 name="name">
+        </td></tr>
+        <tr><td style="padding-left:50px;">
+         What's the target grade?<br/>
+         <input id="second" type="radio" name="grade" value="second">2st</input>
+         <input id="third" type="radio" name="grade" value="third">3nd</input>
+         <input id="fourth" type="radio" name="grade" value="fourth">4rd</input>
+         <input id="fifth" type="radio" name="grade" value="fifth">5th</input>
+         <input id="sixth" type="radio" name="grade" value="sixth">6th</input>
+        </td></tr>
+        <tr><td>
+         <p>You can <i>optionally</i> record your own voice. Otherwise, the default voice will pronounce it.</p>
+         <label>1.</label>
+         <input id="one" type=text size=20 name="one">
+          <span code="{{randomString}}" index="0" class='recordwordbtn'>
+           <img src='/img/phone.png'></img>
+           <img class="startbtn-progress" src="img/loader.gif"></img>
+          </span> 
+        </td></tr>
+        <tr><td>
+         <label>2.</label>
+         <input id="two" type=text size=20 name="two">
+          <span code="{{randomString}}" index="1" class='recordwordbtn'>
+           <img src='/img/phone.png'></img>
+           <img class="startbtn-progress" src="img/loader.gif"></img>
+          </span> 
+        </td></tr>
+        <tr><td>
+         <label>3.</label>
+         <input id="three" type=text size=20 name="three">
+          <span code="{{randomString}}" index="2" class='recordwordbtn'>
+           <img src='/img/phone.png'></img>
+           <img class="startbtn-progress" src="img/loader.gif"></img>
+          </span> 
+        </td></tr>
+        <tr><td>
+         <label>4.</label>
+         <input id="four" type=text size=20 name="four">
+          <span code="{{randomString}}" index="3" class='recordwordbtn'>
+           <img src='/img/phone.png'></img>
+           <img class="startbtn-progress" src="img/loader.gif"></img>
+          </span> 
+        </td></tr>
+        <tr><td>
+         <label>5.</label>
+         <input id="five" type=text size=20 name="five">
+          <span code="{{randomString}}" index="4" class='recordwordbtn'>
+           <img src='/img/phone.png'></img>
+           <img class="startbtn-progress" src="img/loader.gif"></img>
+          </span> 
+        </td></tr>
+        <tr colspan=2><td>
+         <input class="submitbtn" type=submit value="submit">
+         <img class="submitbtn-progress" src="img/loader.gif"></img>
+        </td></tr>
+       </table>
+      </form>
+      </fieldset>
+    </div>
+    
+    <div id="testList">
+      {% for test in tests %}
+        <div id="test">
+            <span class="owner">{{ test.name }}</span>
+            <span class="startbtn" testid="{{test.testid}}">start this test <img src='/img/phone.png'>
+             <img class="startbtn-progress" src="img/loader.gif"></img>
+            </span>
+            <hr/>
+			<p style="font-weight:bold;">{{ test.grade }} grade test</p>
+            <span class="wordlist">
+			{% for w in test.words %}
+			 <p>{{ w }}</p>
+			{% endfor %}
+			</span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div id="interaction">
+   <h2>Spellitfor.us</h2>
+   <span class="category-desc">
+   <p>Spellitforus is an automated spelling test system that uses the telephone to
+   deliver the words.</p>
+   <p>If you press a telephone, you'll be called and asked to spell
+   the list of words in that test. You "spell" them using the telephone keypad. You can take
+   the tests available to left or you can create your own.</p>
+   <p>Note that when using the keypad for your answers, you only need to <strong>press
+   a key once</strong> per letter. For example, the letter 'b' is 2 (not 22 as it
+   would be when typing a text message).</p>
+   <p>For example...
+   <ul>
+    <li>"bad" -> "223"</li>
+    <li>"banana" -> "226262"</li>
+    <li>"car" -> "227"</li>
+    </ul>
+   </p>
+   </span>
+  </div>
+ </div>
+ 
+ <div id="footer">
+ <hr>
+  <div id="powered-by">
+     powered by:<br>
+     <a href=http://code.google.com/appengine/><img src="img/gae-logo.png" alt="google app engine" height="30" width="30"></a>
+     <a href=http://twilio.com/><img src="img/twilio-logo.jpg" alt="google app engine" height="30" width="30"></a>
+  </div>
+  <div id="me">
+   <br><a href=http://yourdomain.com>you're contact</a> | </a><a href="mailto:help@yourdomain.com?subject=yourapp%20feedback">send feedback</a>
+  </div>
+ </div>
+
+ </body>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '{{ googleAnalyticsCode }}']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></html>
