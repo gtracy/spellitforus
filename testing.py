@@ -26,6 +26,7 @@ ACCOUNT_SID = "your-account-sid"
 ACCOUNT_TOKEN = "your-auth-token"
 API_VERSION = '2010-04-01'
 CALLER_ID = '+1yournumber'
+CALLBACK_DOMAIN = 'http://yourapp.appspot.com/'
 
 class StartTestHandler(webapp.RequestHandler):
     def post(self):
@@ -61,7 +62,7 @@ class StartTestHandler(webapp.RequestHandler):
         account = twilio.Account(ACCOUNT_SID, ACCOUNT_TOKEN)
         tra = {'From' : CALLER_ID,
                'To' : caller,
-               'Url' : 'http://spellitforus.appspot.com/test/quiz?word=%s&index=%s&id=%s'
+               'Url' : CALLBACK_DOMAIN+'test/quiz?word=%s&index=%s&id=%s'
                        % (nextWord,str(index),id),
               }
         try:
@@ -75,7 +76,7 @@ class StartTestHandler(webapp.RequestHandler):
         self.response.out.write('<goodness/>')
 ## end StartTestHandler
 
-## http://spellitforus.appspot.com/test/quiz
+## CALLBACK_DOMAIN/test/quiz
 class GenerateQuizTwiml(webapp.RequestHandler):
     def post(self):
         userTest = db.get(self.request.get('id'))
@@ -124,7 +125,7 @@ class GenerateQuizTwiml(webapp.RequestHandler):
                 
             logging.debug('setting up gather request for word %s at index %s' 
                           % (word,str(index)))
-            gather = twilio.Gather('http://spellitforus.appspot.com/test/quiz?word=%s&id=%s&index=%s' 
+            gather = twilio.Gather(CALLBACK_DOMAIN+'test/quiz?word=%s&id=%s&index=%s' 
                                    % (newWord,self.request.get('id'),str(index)),
                                    method='POST')
             if not userTest.test.wordRecordings:

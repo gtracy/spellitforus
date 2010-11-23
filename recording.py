@@ -44,7 +44,7 @@ class RecordWord(webapp.RequestHandler):
 
         tra = {'From' : testing.CALLER_ID,
                'To' : caller,
-               'Url' : 'http://spellitforus.appspot.com/record/recordtwiml?code=%s&index=%s'
+               'Url' : testing.CALLBACK_DOMAIN+'record/recordtwiml?code=%s&index=%s'
                        % (self.request.get('code'),self.request.get('index')),
               }
         try:

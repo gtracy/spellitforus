@@ -17,7 +17,11 @@ following customizations you'll need to make...
 
 1. app.yaml - Configure your own application id
 
-2. testing.py - Configure your own Twilio credentials and Caller ID
+2. testing.py - Configure your own Twilio and App Engine details...
+ - Twilio account SID
+ - Twilio account token
+ - Twilio caller ID
+ - App Engine domain stub
 
 3. main.py - Configure your own Google Analytics ID
 
